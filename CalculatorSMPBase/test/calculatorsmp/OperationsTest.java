@@ -66,6 +66,8 @@ public class OperationsTest {
         assertTrue(isValid, "La fórmula generada no sigue el formato esperado.");
     }
     
+    @DisplayName("Prueba de que la fórmula tenga la cantidad de operadores esperados")
+    @Test
     void TCMF02() {
         String formula = Operations.MakeFormula();
         int contadorOperadores = 0;
@@ -81,6 +83,8 @@ public class OperationsTest {
         assertTrue(contadorOperadores>=2 && contadorOperadores<=3);
     } // Las fórmulas esperadas deben tener entre 2 (mínimo) y 3 (máximo) operadores.
     
+    @DisplayName("Prueba de que la fórmula tenga la cantidad de operandos esperados")
+    @Test
     void TCMF03() {
         String formula = Operations.MakeFormula();
         int contadorNum = 0;
@@ -97,6 +101,8 @@ public class OperationsTest {
         assertTrue(contadorNum>=3 && contadorNum<=4);
     } // Las fórmulas esperadas deben tener entre 3 (mínimo) y 4 (máximo) operandos.
     
+    @DisplayName("Prueba de que la fórmula tenga la longitud esperada")
+    @Test
     void TCMF04() {
         String formula = Operations.MakeFormula();        
         assertTrue(formula.length()>=5 && formula.length()<=11);
@@ -132,6 +138,27 @@ public class OperationsTest {
     void TCS04() {
         // Verifica la división simple
         assertEquals("20/4=5", Operations.Solve("20/4"));
+    }
+    
+    @DisplayName("Prueba para verificar el resultado si pongo letras alfábeticas sin más.")
+    @Test
+    void TCS05() {
+        // Verifica que pasa si meto un String sin más.
+        assertEquals("abcd=abcd", Operations.Solve("abcd"));
+    }
+    
+    @DisplayName("Prueba para verificar el resultado si pongo solo un operando sin un operador.")
+    @Test
+    void TCS06() {
+        // Verifica que pasa si meto un operando sin más.
+        assertEquals("0=0", Operations.Solve("0"));
+    }
+    
+    @DisplayName("Prueba para verificar el resultado si pongo solo un operador sin un operando.")
+    @Test
+    void TCS07() {
+        // Verifica que pasa si meto un operador sin más.
+        assertEquals("+=0", Operations.Solve("+"));
     }
 
 }
