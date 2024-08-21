@@ -65,6 +65,30 @@ public class OperationsTest {
 
         assertTrue(isValid, "La fórmula generada no sigue el formato esperado.");
     }
+    
+    void TCMF02() {
+        String formula = Operations.MakeFormula();
+        boolean isValid = true;
+
+        for (int i = 0; i < formula.length(); i++) {
+            char c = formula.charAt(i);
+            if (i % 2 == 0) {
+                // Posición par, debería ser un número
+                if (!Character.isDigit(c)) {
+                    isValid = false;
+                    break;
+                }
+            } else {
+                // Posición impar, debería ser un operador (+, -, *, /)
+                if (c != '+' && c != '-' && c != '*' && c != '/') {
+                    isValid = false;
+                    break;
+                }
+            }
+        }
+
+        assertTrue(isValid, "La fórmula generada no sigue el formato esperado.");
+    }
 
     /**
      * Test of Solve method, of class Operations.
