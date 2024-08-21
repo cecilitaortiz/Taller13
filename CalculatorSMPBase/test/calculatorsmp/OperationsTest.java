@@ -68,41 +68,43 @@ public class OperationsTest {
     
     void TCMF02() {
         String formula = Operations.MakeFormula();
-        boolean isValid = true;
-
-        for (int i = 0; i < formula.length(); i++) {
-            char c = formula.charAt(i);
-            if (i % 2 == 0) {
-                // Posición par, debería ser un número
-                if (!Character.isDigit(c)) {
-                    isValid = false;
-                    break;
-                }
-            } else {
-                // Posición impar, debería ser un operador (+, -, *, /)
-                if (c != '+' && c != '-' && c != '*' && c != '/') {
-                    isValid = false;
-                    break;
-                }
+        int contadorOperadores = 0;
+        for(Character c: formula.toCharArray()){
+            if(Character.isDigit(c)){
+                continue;
+            } else if(c.equals('+') || c.equals('-') || c.equals('*') || c.equals('/')){
+                contadorOperadores++;
+            } else{
+                fail("La fórmula está mal estructurada.");
             }
         }
-
-        assertTrue(isValid, "La fórmula generada no sigue el formato esperado.");
-    }
+        assertTrue(contadorOperadores>=2 && contadorOperadores<=3);
+    } // Las fórmulas esperadas deben tener entre 2 (mínimo) y 3 (máximo) operadores.
+    
+    void TCMF03() {
+        String formula = Operations.MakeFormula();
+        int contadorNum = 0;
+        char[] formulaArray = formula.toCharArray();
+        for(int i = 0; i<formula.length();i++){
+            if(Character.isDigit(formulaArray[i]) && !Character.isDigit(formulaArray[i+1])){
+                contadorNum++;
+            } else if(formulaArray[i]=='+' || formulaArray[i]=='-' || formulaArray[i]=='*' || formulaArray[i]=='/'){
+                continue;
+            } else{
+                fail("La fórmula está mal estructurada.");
+            }
+        }
+        assertTrue(contadorNum>=3 && contadorNum<=4);
+    } // Las fórmulas esperadas deben tener entre 3 (mínimo) y 4 (máximo) operandos.
+    
+    void TCMF04() {
+        String formula = Operations.MakeFormula();        
+        assertTrue(formula.length()>=5 && formula.length()<=11);
+    } // Las fórmulas esperadas deben tener entre 5 (mínimo) y 5 (máximo) de longitud.
 
     /**
      * Test of Solve method, of class Operations.
-     */
-    @Test
-    public void testSolve() {
-        System.out.println("Solve");
-        String formula = "";
-        String expResult = "";
-        String result = Operations.Solve(formula);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-    }
-    //PRUEBAS PARA SOLVE
+     */    
 
     @DisplayName("Prueba para resolver suma")
     @Test
