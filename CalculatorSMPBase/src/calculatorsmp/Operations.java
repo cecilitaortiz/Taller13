@@ -5,6 +5,8 @@
  */
 package calculatorsmp;
 import java.util.Stack;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
 /**
  *
  * @author Djurado
@@ -28,7 +30,7 @@ public class Operations {
         }
         return build.toString();
     }
-
+    
     public static String Solve(String formula){
         Stack<String> tempStack = new Stack<>();//Store number or operator
         Stack<Character> operatorStack = new Stack<Character>();//Store operator
