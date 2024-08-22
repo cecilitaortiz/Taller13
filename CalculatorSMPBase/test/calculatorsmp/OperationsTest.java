@@ -160,5 +160,45 @@ public class OperationsTest {
         // Verifica que pasa si meto un operador sin más.
         assertEquals("+=0", Operations.Solve("+"));
     }
+    
+    @DisplayName("Prueba para verificar el resultado si pongo un String, un operador y un número.")
+    @Test
+    void TCS08() {
+        // Verifica que pasa si pongo un String, un operador y un número.
+        assertEquals("a+1=1", Operations.Solve("a+1"));
+    }
+    
+    @DisplayName("Prueba para verificar el resultado si pongo solo un operador y un número.")
+    @Test
+    void TCS09() {
+        // Verifica que pasa si pongo solo un operador y un número.
+        assertEquals("+1=1", Operations.Solve("+1"));
+    }
+    
+    @DisplayName("Prueba para verificar el resultado si pongo primero un número y luego un operando.")
+    @Test
+    void TCS010() {
+        // Verifica que pasa si pongo primero un número y luego un operando.
+        assertEquals("0+=0+", Operations.Solve("0+"));
+    }
+    
+    @DisplayName("Prueba para verificar el resultado si pongo una operación entre dos Strings.")
+    @Test
+    void TCS011() {
+        // Verifica que pasa si pongo una operación entre dos Strings.
+        try {
+            Operations.Solve("a+a");
+            fail("Se esperaba una NumberFormatException");
+        } catch (NumberFormatException e) {            
+            assertEquals(true, true);
+        }
+    }
+    
+    @DisplayName("Prueba para verificar el resultado si pongo tres operadores seguidos en vez de operandos.")
+    @Test
+    void TCS012() {
+        // Verifica que pasa si pongo tres operadores seguidos en vez de operandos.
+        assertEquals("+++=0", Operations.Solve("+++"));
+    }
 
 }
